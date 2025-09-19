@@ -24,6 +24,7 @@ export interface Hero {
   cover_image?: Image['image'];
   locale?: string;
   className?: string;
+  [key: string]: any;
 }
 
 // Text (HTML RTE) Component

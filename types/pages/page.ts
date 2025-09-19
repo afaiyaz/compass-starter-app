@@ -19,3 +19,7 @@ export type ArticleListingPage = {
   articles?: Article[] | []
   entry?:PageEntry & pageRenderProps
 }
+
+export type EfficiencyPage = {
+  entry: PageEntry & pageRenderProps
+}
