@@ -5,7 +5,7 @@ import { Page } from '@/types'
 import { Hero } from '@/types/components'
 import { PageWrapper, RenderComponents, NotFoundComponent, Hero as HeroComponent, Text } from '@/components'
 import { onEntryChange } from '@/config'
-import { getPersonalizeAttribute, isDataInLiveEdit, removeSpecialChar } from '@/utils'
+import { getPersonalizeAttribute, isDataInLiveEdit, detectUserLocation } from '@/utils'
 import useRouterHook from '@/hooks/useRouterHook'
 import { setDataForChromeExtension } from '@/utils'
 import { usePersonalization } from '@/context'
@@ -38,19 +38,18 @@ export default function EfficiencyPage() {
      */
     useEffect(() => {
         const setAttribute = async () => {
-            // Simulate user location detection (in real app, this would come from IP geolocation, user input, etc.)
-            const simulatedUserState = Math.random() > 0.5 ? 'nevada' : 'california'
-            setUserState(simulatedUserState)
-            
+            const detectedState = await detectUserLocation()
+            setUserState(detectedState)
+
             const audiences = personalizeConfig?.audiences
-            const attributes = getPersonalizeAttribute(audiences, simulatedUserState)
+            const attributes = getPersonalizeAttribute(audiences, detectedState)
             await personalizationSDK?.set({ ...attributes })
         }
 
-        if (personalizeConfig && personalizationSDK) {
+        if (personalizeConfig && personalizationSDK && data) {
             setAttribute()
         }
-    }, [personalizeConfig, personalizationSDK])
+    }, [personalizeConfig, personalizationSDK, data])
 
     /**
      * @method fetchData
