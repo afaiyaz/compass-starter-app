@@ -20,6 +20,12 @@ export const featuredArticlesReferenceIncludes = [
     'featured_articles.articles'
 ]
 
+export const efficiencyReferenceIncludes = [
+    'hero.heading',
+    'hero.content',
+    'hero.image'
+]
+
 export const navigationReferenceIncludes = [
     'main_navigation',
     'main_navigation.items.link',
@@ -55,5 +61,9 @@ export const footerJsonRtePathIncludes = [
 ]
 
 export const articleJSONRtePathIncludes = [
+    'content'
+]
+
+export const efficiencyJSONRtePathIncludes = [
     'content'
 ]
